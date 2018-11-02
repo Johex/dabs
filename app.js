@@ -1,9 +1,10 @@
 const express = require('express');
+const delay = require('delay');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
-const port = 3000;
+const port = 80;
 
 
 
@@ -65,7 +66,11 @@ app.get('/', function (req,res) {
 
         });
     });
-    res.render('index', {data: count});
+    (async () => {
+        await delay(600);
+        res.render('index', {data: count});
+    })();
+
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
